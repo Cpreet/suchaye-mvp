@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "roles": [
+    {
+      "name": "frontend-engineer",
+      "description": "Implements UI, routing, product pages, state management, shadcn/ui integration.",
+      "patterns": [
+        "src/**",
+        "index.html",
+        "vite.config.*"
+      ]
+    },
+    {
+      "name": "ui-designer",
+      "description": "Guides visual design, component structure, typography, spacing, and overall UI quality using the UI Guide.",
+      "patterns": [
+        "docs/suchaye-ui-guide.md",
+        "docs/suchaye-component-map-and-ui-guide.md",
+        "src/components/**",
+        "src/styles/**",
+        "tailwind.config.*"
+      ]
+    },
+    {
+      "name": "content-manager",
+      "description": "Manages site copy, SEO, headings, product descriptions, and static content.",
+      "patterns": [
+        "docs/suchaye-copy-pack.md",
+        "docs/prd-suchaye.md",
+        "src/routes/**"
+      ]
+    },
+    {
+      "name": "product-manager",
+      "description": "Ensures features match PRD, sitemap, and acceptance criteria.",
+      "patterns": [
+        "docs/**"
+      ]
+    },
+    {
+      "name": "integrations-engineer",
+      "description": "Handles Razorpay, WhatsApp links, checkout logic, cart state, and related utilities.",
+      "patterns": [
+        "src/lib/**",
+        "src/routes/checkout.*"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "pattern": "docs/**",
+      "description": "All Suchaye documentation (PRD, sitemap, copy, UI guide, component map).",
+      "context": {
+        "priority": "high",
+        "maxFiles": 15
+      }
+    },
+    {
+      "pattern": "docs/prd-suchaye.md",
+      "description": "Primary PRD and definitive source of truth for feature behavior and requirements.",
+      "context": {
+        "priority": "highest",
+        "maxFiles": 1
+      }
+    },
+    {
+      "pattern": "docs/suchaye-sitemap.md",
+      "description": "Defines URL structure, pages, purpose, and SEO expectations.",
+      "context": {
+        "priority": "high",
+        "maxFiles": 1
+      }
+    },
+    {
+      "pattern": "docs/suchaye-copy-pack.md",
+      "description": "Brand voice, UI text, product descriptions, microcopy.",
+      "context": {
+        "priority": "high",
+        "maxFiles": 1
+      }
+    },
+    {
+      "pattern": "docs/suchaye-component-map-and-ui-guide.md",
+      "description": "Component architecture, folder structure, shadcn component usage, UI tokens, typography, spacing, button styles.",
+      "context": {
+        "priority": "highest",
+        "maxFiles": 1
+      }
+    },
+    {
+      "pattern": "src/main.@(tsx|jsx)",
+      "description": "Vite entry, aligned with global layout and UI shell rules.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "high"
+      }
+    },
+    {
+      "pattern": "src/App.@(tsx|jsx)",
+      "description": "Top application shell + routing container.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-sitemap.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "high"
+      }
+    },
+    {
+      "pattern": "src/routes/**",
+      "description": "All route-level pages for Suchaye storefront.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-sitemap.md",
+          "docs/suchaye-copy-pack.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "high",
+        "maxFiles": 20
+      }
+    },
+    {
+      "pattern": "src/routes/home.@(tsx|jsx)",
+      "description": "Home Page structure: hero, category tiles, bestsellers, brand story.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-copy-pack.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "highest"
+      }
+    },
+    {
+      "pattern": "src/routes/jewellery/**",
+      "description": "Jewellery listing and product detail pages.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-sitemap.md",
+          "docs/suchaye-copy-pack.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "high"
+      }
+    },
+    {
+      "pattern": "src/routes/candles/**",
+      "description": "Candle listing and product detail pages.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-sitemap.md",
+          "docs/suchaye-copy-pack.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "high"
+      }
+    },
+    {
+      "pattern": "src/routes/(cart|checkout|about|contact|policies).@(tsx|jsx)",
+      "description": "Supporting pages for cart, checkout, content, and policy flows.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-copy-pack.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "medium"
+      }
+    },
+    {
+      "pattern": "src/components/ui/**",
+      "description": "shadcn/ui primitives used for building UI components.",
+      "context": {
+        "read": [
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "medium",
+        "maxFiles": 30
+      }
+    },
+    {
+      "pattern": "src/components/**",
+      "description": "Shared components (HeroSection, ProductCard, Layout, Cart components).",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md",
+          "docs/suchaye-copy-pack.md",
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "high",
+        "maxFiles": 40
+      }
+    },
+    {
+      "pattern": "src/lib/**",
+      "description": "Cart logic, product models, helpers, Razorpay integration.",
+      "context": {
+        "read": [
+          "docs/prd-suchaye.md"
+        ],
+        "priority": "medium"
+      }
+    },
+    {
+      "pattern": "src/styles/**",
+      "description": "Global Tailwind theme, tokens, utilities.",
+      "context": {
+        "read": [
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "low",
+        "maxFiles": 10
+      }
+    },
+    {
+      "pattern": "tailwind.config.*",
+      "description": "Tailwind theme configuration aligned with UI tokens.",
+      "context": {
+        "read": [
+          "docs/suchaye-component-map-and-ui-guide.md"
+        ],
+        "priority": "low"
+      }
+    },
+    {
+      "pattern": "vite.config.*",
+      "description": "Vite build configuration.",
+      "context": {
+        "priority": "low"
+      }
+    },
+    {
+      "pattern": "package.json",
+      "description": "Dependencies and scripts.",
+      "context": {
+        "priority": "low",
+        "maxFiles": 1
+      }
+    }
+  ]
+}
