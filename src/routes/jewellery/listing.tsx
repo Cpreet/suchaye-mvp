@@ -2,9 +2,12 @@ import { useState, useMemo } from "react";
 import { Section } from "@/components/sections/section";
 import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
-import type { JewelleryType } from "@/data/products";
+import type { JewelleryType, JewelleryProduct } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+
+function isJewelleryProduct(p: { category: string }): p is JewelleryProduct {
+  return p.category === "jewellery";
+}
 
 export function JewelleryListingPage() {
   const allProducts = getProductsByCategory("jewellery");
@@ -14,7 +17,7 @@ export function JewelleryListingPage() {
     if (selectedType === "all") {
       return allProducts;
     }
-    return allProducts.filter((p) => p.type === selectedType);
+    return allProducts.filter((p): p is JewelleryProduct => isJewelleryProduct(p) && p.type === selectedType);
   }, [selectedType, allProducts]);
 
   const types: (JewelleryType | "all")[] = [

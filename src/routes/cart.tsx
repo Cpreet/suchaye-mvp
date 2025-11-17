@@ -11,18 +11,10 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export function CartPage() {
   const [cart, setCart] = useState(getCart());
-  const [cartProducts, setCartProducts] = useState(
-    allProducts.filter((p) => cart.items.some((item) => item.productId === p.id))
-  );
 
   useEffect(() => {
     const currentCart = getCart();
     setCart(currentCart);
-    setCartProducts(
-      allProducts.filter((p) =>
-        currentCart.items.some((item) => item.productId === p.id)
-      )
-    );
   }, []);
 
   const handleQuantityChange = (productId: string, quantity: number) => {
@@ -36,11 +28,6 @@ export function CartPage() {
     removeFromCart(productId);
     const updatedCart = getCart();
     setCart(updatedCart);
-    setCartProducts(
-      allProducts.filter((p) =>
-        updatedCart.items.some((item) => item.productId === p.id)
-      )
-    );
     window.dispatchEvent(new Event("cartUpdated"));
   };
 

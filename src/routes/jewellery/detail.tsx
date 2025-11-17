@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router";
 import { useState, useEffect } from "react";
-import { getProductBySlug, allProducts } from "@/data/products";
+import { getProductBySlug } from "@/data/products";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductInfoBlock } from "@/components/product/product-info-block";
 import { ProductSpecs } from "@/components/product/product-specs";

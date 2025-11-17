@@ -2,8 +2,12 @@ import { useState, useMemo } from "react";
 import { Section } from "@/components/sections/section";
 import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
-import type { ScentFamily } from "@/data/products";
+import type { ScentFamily, CandleProduct } from "@/data/products";
 import { Button } from "@/components/ui/button";
+
+function isCandleProduct(p: { category: string }): p is CandleProduct {
+  return p.category === "candle";
+}
 
 export function CandlesListingPage() {
   const allProducts = getProductsByCategory("candle");
@@ -13,7 +17,7 @@ export function CandlesListingPage() {
     if (selectedScent === "all") {
       return allProducts;
     }
-    return allProducts.filter((p) => p.scentFamily === selectedScent);
+    return allProducts.filter((p): p is CandleProduct => isCandleProduct(p) && p.scentFamily === selectedScent);
   }, [selectedScent, allProducts]);
 
   const scents: (ScentFamily | "all")[] = [
