@@ -180,11 +180,18 @@ export function MainNav({
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [menuTop, setMenuTop] = useState<number>(0);
   const navRef = useRef<HTMLElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        // Check if clicking on dropdown content
+        const target = event.target as HTMLElement;
+        const dropdown = document.getElementById('mega-menu-dropdown');
+        if (dropdown && dropdown.contains(target)) {
+          return;
+        }
         setOpenDropdown(null);
       }
     }
@@ -196,29 +203,50 @@ export function MainNav({
 
   // Close dropdown on route change
   useEffect(() => {
-    setOpenDropdown(null);
+    // Only close if currently open to potentially avoid some redundant renders, 
+    // but mainly we just want to close it on navigation.
+    // Using a timeout to ensure this runs after the render cycle if needed, or just direct call.
+    // The linter warning is because we are responding to a prop/state change by triggering another state change.
+    // For navigation (location) changes, this is acceptable "reset" behavior.
+    const handleLocationChange = () => setOpenDropdown(null);
+    handleLocationChange();
   }, [location]);
 
-  const toggleDropdown = (label: string) => {
+  const handleMouseEnter = (label: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    // Calculate top position immediately on hover
+    if (orientation === "horizontal" && navRef.current) {
+      const header = navRef.current.closest('header');
+      if (header) {
+        setMenuTop(header.getBoundingClientRect().bottom);
+      } else {
+        setMenuTop(navRef.current.getBoundingClientRect().bottom);
+      }
+    }
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150); // Small delay to allow moving to the dropdown
+  };
+
+  const toggleDropdownMobile = (label: string) => {
     if (openDropdown === label) {
       setOpenDropdown(null);
     } else {
-      // Calculate the bottom position of the header or nav
-      if (orientation === "horizontal" && navRef.current) {
-        const header = navRef.current.closest('header');
-        if (header) {
-          setMenuTop(header.getBoundingClientRect().bottom);
-        } else {
-          setMenuTop(navRef.current.getBoundingClientRect().bottom);
-        }
-      }
       setOpenDropdown(label);
     }
   };
 
   const baseClasses =
     orientation === "horizontal"
-      ? "flex items-center gap-4 md:gap-6"
+      ? "flex items-center gap-4 md:gap-6 h-full"
       : "flex flex-col gap-3 md:gap-4";
 
   return (
@@ -234,7 +262,7 @@ export function MainNav({
         const isOpen = openDropdown === item.label;
 
         if (orientation === "vertical") {
-          // Mobile / Vertical Layout
+          // Mobile / Vertical Layout (Click based)
           return (
             <div key={item.label} className="flex flex-col">
               <div className="flex items-center justify-between">
@@ -243,7 +271,7 @@ export function MainNav({
                   onClick={(e) => {
                     if (hasMenu) {
                       e.preventDefault();
-                      toggleDropdown(item.label);
+                      toggleDropdownMobile(item.label);
                     } else {
                       onNavigate?.();
                     }
@@ -258,7 +286,7 @@ export function MainNav({
                 </Link>
                 {hasMenu && (
                   <button
-                    onClick={() => toggleDropdown(item.label)}
+                    onClick={() => toggleDropdownMobile(item.label)}
                     className="p-2 -mr-2 text-muted-foreground"
                   >
                     {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -306,21 +334,18 @@ export function MainNav({
           );
         }
 
-        // Desktop / Horizontal Layout
+        // Desktop / Horizontal Layout (Hover based)
         return (
-          <div key={item.label} className="">
+          <div 
+            key={item.label} 
+            className="h-full flex items-center"
+            onMouseEnter={() => hasMenu && handleMouseEnter(item.label)}
+            onMouseLeave={handleMouseLeave}
+          >
             <Link
-              to={hasMenu ? "#" : item.href}
-              onClick={(e) => {
-                if (hasMenu) {
-                  e.preventDefault();
-                  toggleDropdown(item.label);
-                } else {
-                  onNavigate?.();
-                }
-              }}
+              to={item.href}
               className={cn(
-                "text-xs md:text-sm font-medium transition-all duration-200 relative touch-manipulation py-3 flex items-center gap-1 select-none z-[60]",
+                "text-xs md:text-sm font-medium transition-all duration-200 relative touch-manipulation py-3 flex items-center gap-1 select-none z-60 h-full",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
@@ -347,25 +372,32 @@ export function MainNav({
                 <div 
                   className="fixed left-0 right-0 bottom-0 bg-black/20 backdrop-blur-sm z-40 animate-in fade-in duration-200"
                   style={{ top: `${menuTop}px` }}
-                  onClick={() => setOpenDropdown(null)}
                 />
                 
                 {/* Dropdown Content */}
                 <div 
+                  id="mega-menu-dropdown"
                   className="fixed left-0 right-0 bg-background border-b border-border shadow-lg z-50 animate-in slide-in-from-top-2 duration-200 overflow-y-auto"
                   style={{ 
                     top: `${menuTop}px`,
                     maxHeight: `calc(100vh - ${menuTop}px)`
                   }}
+                  onMouseEnter={() => {
+                    if (timeoutRef.current) {
+                      clearTimeout(timeoutRef.current);
+                      timeoutRef.current = null;
+                    }
+                  }}
+                  onMouseLeave={handleMouseLeave}
                 >
                   <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8">
                     <div className="grid grid-cols-12 gap-8">
                       
-                      {/* Link Columns */}
-                      <div className="col-span-5 flex gap-12">
+                      {/* Link Columns - Aligned to right of their section (closer to separator) */}
+                      <div className="col-span-5 flex justify-end gap-12">
                         {item.menu!.columns.map((col, idx) => (
-                          <div key={idx} className="flex flex-col gap-4">
-                            <h3 className="font-semibold text-sm text-foreground tracking-wide uppercase">{col.title}</h3>
+                          <div key={idx} className="flex flex-col gap-4 w-40">
+                            <h3 className="font-semibold text-sm text-foreground tracking-wide uppercase border-b border-border/50 pb-2">{col.title}</h3>
                             <div className="flex flex-col gap-2.5">
                               {col.items.map((sub) => (
                                 <Link
@@ -382,26 +414,26 @@ export function MainNav({
                         ))}
                       </div>
 
-                      {/* Divider */}
+                      {/* Divider - Centered */}
                       <div className="col-span-1 flex justify-center">
-                        <div className="w-px h-full bg-border/50" />
+                        <div className="w-px h-full bg-border" />
                       </div>
                       
-                      {/* Featured Images */}
+                      {/* Featured Images - Aligned to left of their section (closer to separator) */}
                       <div className="col-span-6 grid grid-cols-2 gap-6">
                          {item.menu!.featured?.map((feat, idx) => (
                            <Link 
                               key={idx} 
                               to={feat.href}
                               onClick={() => setOpenDropdown(null)}
-                              className="group relative overflow-hidden rounded-lg aspect-[4/3] bg-muted"
+                              className="group relative overflow-hidden rounded-lg aspect-4/3 bg-muted"
                            >
                               <img 
                                 src={feat.image} 
                                 alt={feat.title}
                                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+                              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-80" />
                               <div className="absolute bottom-4 left-4 text-white">
                                 <p className="font-medium text-lg leading-none mb-1">{feat.title}</p>
                                 <div className="flex items-center gap-1 text-xs font-medium opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">

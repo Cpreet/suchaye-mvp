@@ -35,20 +35,20 @@ export function SiteHeader() {
           <div className="flex flex-1 items-center justify-start gap-4">
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon" className="h-9 w-9 touch-manipulation">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[280px] sm:w-[320px]">
-                <nav className="flex flex-col gap-4 mt-6">
-                  <BrandLogo />
-                  <MainNav
-                    orientation="vertical"
-                    onNavigate={() => setIsOpen(false)}
-                  />
-                </nav>
-              </SheetContent>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon" className="h-9 w-9 touch-manipulation">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[280px] sm:w-[320px] overflow-y-auto">
+              <nav className="flex flex-col gap-4 mt-6">
+                <BrandLogo />
+                <MainNav
+                  orientation="vertical"
+                  onNavigate={() => setIsOpen(false)}
+                />
+              </nav>
+            </SheetContent>
             </Sheet>
           </div>
 
