@@ -13,7 +13,7 @@ function isBagProduct(p: { category: string }): p is BagProduct {
 export function BagsListingPage() {
   const allProducts = getProductsByCategory("bag");
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedType = (searchParams.get("type") as BagType) || "all";
+  const selectedType = (searchParams.get("type") as BagType | null) || "all";
   const [selectedMaterial, setSelectedMaterial] = useState<BagMaterial | "all">("all");
 
   const filteredProducts = useMemo(() => {

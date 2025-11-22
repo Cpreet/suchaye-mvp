@@ -13,7 +13,7 @@ function isCandleProduct(p: { category: string }): p is CandleProduct {
 export function CandlesListingPage() {
   const allProducts = getProductsByCategory("candle");
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedScent = (searchParams.get("family") as ScentFamily) || "all";
+  const selectedScent = (searchParams.get("family") as ScentFamily | null) || "all";
 
   const filteredProducts = useMemo(() => {
     if (selectedScent === "all") {

@@ -13,7 +13,7 @@ function isJewelleryProduct(p: { category: string }): p is JewelleryProduct {
 export function JewelleryListingPage() {
   const allProducts = getProductsByCategory("jewellery");
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedType = (searchParams.get("type") as JewelleryType) || "all";
+  const selectedType = (searchParams.get("type") as JewelleryType | null) || "all";
 
   const filteredProducts = useMemo(() => {
     if (selectedType === "all") {
