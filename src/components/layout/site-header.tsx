@@ -7,7 +7,6 @@ import { BrandLogo } from "../navigation/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export function SiteHeader() {
   const [cartCount, setCartCount] = useState(0);
