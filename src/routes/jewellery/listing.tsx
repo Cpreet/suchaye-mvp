@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router";
 import { Section } from "@/components/sections/section";
 import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
@@ -11,7 +12,8 @@ function isJewelleryProduct(p: { category: string }): p is JewelleryProduct {
 
 export function JewelleryListingPage() {
   const allProducts = getProductsByCategory("jewellery");
-  const [selectedType, setSelectedType] = useState<JewelleryType | "all">("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedType = (searchParams.get("type") as JewelleryType) || "all";
 
   const filteredProducts = useMemo(() => {
     if (selectedType === "all") {
@@ -28,6 +30,15 @@ export function JewelleryListingPage() {
     "rings",
   ];
 
+  const handleFilterChange = (type: JewelleryType | "all") => {
+    if (type === "all") {
+      searchParams.delete("type");
+    } else {
+      searchParams.set("type", type);
+    }
+    setSearchParams(searchParams);
+  };
+
   return (
     <Section
       title="Handmade Jewellery by Suchaye"
@@ -39,7 +50,7 @@ export function JewelleryListingPage() {
           <Button
             key={type}
             variant={selectedType === type ? "default" : "outline"}
-            onClick={() => setSelectedType(type)}
+            onClick={() => handleFilterChange(type)}
             className="capitalize rounded-full px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-medium touch-manipulation"
           >
             {type === "all" ? "All" : type}
@@ -52,4 +63,3 @@ export function JewelleryListingPage() {
     </Section>
   );
 }
-

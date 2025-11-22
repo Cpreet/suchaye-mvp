@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useSearchParams } from "react-router";
 import { Section } from "@/components/sections/section";
 import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
@@ -11,7 +12,8 @@ function isBagProduct(p: { category: string }): p is BagProduct {
 
 export function BagsListingPage() {
   const allProducts = getProductsByCategory("bag");
-  const [selectedType, setSelectedType] = useState<BagType | "all">("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedType = (searchParams.get("type") as BagType) || "all";
   const [selectedMaterial, setSelectedMaterial] = useState<BagMaterial | "all">("all");
 
   const filteredProducts = useMemo(() => {
@@ -44,6 +46,15 @@ export function BagsListingPage() {
     "canvas",
   ];
 
+  const handleTypeChange = (type: BagType | "all") => {
+    if (type === "all") {
+      searchParams.delete("type");
+    } else {
+      searchParams.set("type", type);
+    }
+    setSearchParams(searchParams);
+  };
+
   return (
     <Section
       title="Handmade Bags by Suchaye"
@@ -57,7 +68,7 @@ export function BagsListingPage() {
             <Button
               key={type}
               variant={selectedType === type ? "default" : "outline"}
-              onClick={() => setSelectedType(type)}
+              onClick={() => handleTypeChange(type)}
               className="capitalize rounded-full px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-medium touch-manipulation"
             >
               {type === "all" ? "All Types" : type}
@@ -84,4 +95,3 @@ export function BagsListingPage() {
     </Section>
   );
 }
-

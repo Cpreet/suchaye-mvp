@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router";
 import { Section } from "@/components/sections/section";
 import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
@@ -11,7 +12,8 @@ function isCandleProduct(p: { category: string }): p is CandleProduct {
 
 export function CandlesListingPage() {
   const allProducts = getProductsByCategory("candle");
-  const [selectedScent, setSelectedScent] = useState<ScentFamily | "all">("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedScent = (searchParams.get("family") as ScentFamily) || "all";
 
   const filteredProducts = useMemo(() => {
     if (selectedScent === "all") {
@@ -28,6 +30,15 @@ export function CandlesListingPage() {
     "sweet",
   ];
 
+  const handleFilterChange = (scent: ScentFamily | "all") => {
+    if (scent === "all") {
+      searchParams.delete("family");
+    } else {
+      searchParams.set("family", scent);
+    }
+    setSearchParams(searchParams);
+  };
+
   return (
     <Section
       title="Handmade Scented Candles"
@@ -39,7 +50,7 @@ export function CandlesListingPage() {
           <Button
             key={scent}
             variant={selectedScent === scent ? "default" : "outline"}
-            onClick={() => setSelectedScent(scent)}
+            onClick={() => handleFilterChange(scent)}
             className="capitalize rounded-full px-4 md:px-5 py-1.5 md:py-2 text-xs md:text-sm font-medium touch-manipulation"
           >
             {scent === "all" ? "All Scents" : scent}
@@ -52,4 +63,3 @@ export function CandlesListingPage() {
     </Section>
   );
 }
-
