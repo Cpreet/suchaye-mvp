@@ -14,6 +14,14 @@ import {
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
+// Mega-menu images
+import jewelleryEverydayEssentials from '@/assets/images/mega-menu/jewellery-everyday-essentials.png';
+import jewelleryStatementPieces from '@/assets/images/mega-menu/jewellery-statement-pieces.png';
+import candlesCalmingCollection from '@/assets/images/mega-menu/candles-calming-collection.png';
+import candlesAutumnWarmth from '@/assets/images/mega-menu/candles-autumn-warmth.png';
+import bagsWeekendGetaway from '@/assets/images/mega-menu/bags-weekend-getaway.png';
+import bagsOfficeEssentials from '@/assets/images/mega-menu/bags-office-essentials.png';
+
 interface MainNavProps {
   orientation?: "horizontal" | "vertical";
   onNavigate?: () => void;
@@ -77,12 +85,12 @@ const navItems: NavItem[] = [
       featured: [
         {
           title: "Everyday Essentials",
-          image: "https://images.unsplash.com/photo-1535632066927-ab6c9ae6f3c3?auto=format&fit=crop&w=600&q=80",
+          image: jewelleryEverydayEssentials,
           href: "/jewellery?collection=essentials"
         },
         {
           title: "Statement Pieces",
-          image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80",
+          image: jewelleryStatementPieces,
           href: "/jewellery?collection=statement"
         }
       ]
@@ -117,12 +125,12 @@ const navItems: NavItem[] = [
       featured: [
         {
           title: "The Calming Collection",
-          image: "https://images.unsplash.com/photo-1602874805491-50cf59591549?auto=format&fit=crop&w=600&q=80",
+          image: candlesCalmingCollection,
           href: "/candles?collection=calming"
         },
         {
           title: "Autumn Warmth",
-          image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=600&q=80",
+          image: candlesAutumnWarmth,
           href: "/candles?collection=autumn"
         }
       ]
@@ -157,12 +165,12 @@ const navItems: NavItem[] = [
       featured: [
         {
           title: "Weekend Getaway",
-          image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=600&q=80",
+          image: bagsWeekendGetaway,
           href: "/bags?collection=weekend"
         },
         {
           title: "Office Essentials",
-          image: "https://images.unsplash.com/photo-1594633312681-425a7b9568e2?auto=format&fit=crop&w=600&q=80",
+          image: bagsOfficeEssentials,
           href: "/bags?collection=work"
         }
       ]

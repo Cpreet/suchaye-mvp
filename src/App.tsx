@@ -12,6 +12,7 @@ import { CheckoutPage } from "./routes/checkout";
 import { AboutPage } from "./routes/about";
 import { ContactPage } from "./routes/contact";
 import { PoliciesPage } from "./routes/policies";
+import { DevDrawer } from "./components/dev/dev-drawer";
 
 const router = createBrowserRouter([
   {
@@ -71,7 +72,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <DevDrawer />
+    </>
+  );
 }
 
 export default App;

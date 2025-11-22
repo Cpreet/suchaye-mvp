@@ -1,6 +1,10 @@
 import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 
+import jewelleryImg from "@/assets/images/categories/jewellery.png";
+import candlesImg from "@/assets/images/categories/candles.png";
+import bagsImg from "@/assets/images/categories/bags.png";
+
 interface Category {
   title: string;
   description: string;
@@ -14,21 +18,21 @@ const categories: Category[] = [
     title: "Handcrafted Jewellery",
     description: "Delicate pieces that add a quiet sparkle.",
     href: "/jewellery",
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
+    image: jewelleryImg,
     className: "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto",
   },
   {
     title: "Artisanal Candles",
     description: "Scented candles to soften your evenings.",
     href: "/candles",
-    image: "https://images.unsplash.com/photo-1606800053560-4c5c0c0c0c0c?auto=format&fit=crop&w=800&q=80",
+    image: candlesImg,
     className: "md:col-span-1 md:row-span-1 aspect-[4/3] md:aspect-square",
   },
   {
     title: "Handmade Bags",
     description: "Thoughtfully crafted for everyday adventures.",
     href: "/bags",
-    image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=800&q=80",
+    image: bagsImg,
     className: "md:col-span-1 md:row-span-1 aspect-[4/3] md:aspect-square",
   },
 ];

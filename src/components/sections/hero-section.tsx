@@ -17,19 +17,22 @@ interface HeroSectionProps {
   };
 }
 
+import hero1 from "@/assets/images/hero/hero-1.png";
+import hero2 from "@/assets/images/hero/hero-2.png";
+import hero3 from "@/assets/images/hero/hero-3.png";
+
 // Lifestyle images showing people enjoying Suchaye products
-// Replace these placeholder URLs with actual lifestyle images
 const lifestyleImages = [
   {
-    url: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&h=1600&fit=crop&q=80",
+    url: hero1,
     alt: "Person wearing handmade jewellery in a warm, natural setting",
   },
   {
-    url: "https://images.unsplash.com/photo-1606800053560-4c5c0c0c0c0c?w=1200&h=1600&fit=crop&q=80",
+    url: hero2,
     alt: "Handmade candle creating a warm, cozy atmosphere",
   },
   {
-    url: "https://images.unsplash.com/photo-1606800053560-4c5c0c0c0c0c?w=1200&h=1600&fit=crop&q=80",
+    url: hero3,
     alt: "Person enjoying Suchaye products in their daily life",
   },
 ];

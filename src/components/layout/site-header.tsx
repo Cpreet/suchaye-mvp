@@ -7,6 +7,7 @@ import { BrandLogo } from "../navigation/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export function SiteHeader() {
   const [cartCount, setCartCount] = useState(0);
@@ -59,6 +60,7 @@ export function SiteHeader() {
 
           {/* Right Section: Cart */}
           <div className="flex flex-1 items-center justify-end gap-2 md:gap-3">
+             {/* ThemeSwitcher removed from header as it moved to DevDrawer */}
             <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative h-9 w-9 md:h-10 md:w-10 hover:bg-accent/50 transition-colors touch-manipulation">
                 <ShoppingCart className="h-4 w-4 md:h-5 md:w-5" />
