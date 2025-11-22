@@ -11,14 +11,14 @@ interface Category {
 
 const categories: Category[] = [
   {
-    title: "Handmade Jewellery",
+    title: "Handcrafted Jewellery",
     description: "Delicate pieces that add a quiet sparkle.",
     href: "/jewellery",
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
     className: "md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto",
   },
   {
-    title: "Handmade Candles",
+    title: "Artisanal Candles",
     description: "Scented candles to soften your evenings.",
     href: "/candles",
     image: "https://images.unsplash.com/photo-1606800053560-4c5c0c0c0c0c?auto=format&fit=crop&w=800&q=80",
