@@ -14,9 +14,9 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section className={cn("container mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16 xl:py-20", className)}>
+    <section className={cn("container mx-auto px-4 md:px-6 lg:px-8 py-20 md:py-24 lg:py-32", className)}>
       {(title || subtitle) && (
-        <div className="mb-6 md:mb-8 lg:mb-10 xl:mb-12 space-y-2 md:space-y-3">
+        <div className="mb-8 md:mb-12 lg:mb-16 space-y-3 md:space-y-4">
           {title && (
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-medium">{title}</h2>
           )}

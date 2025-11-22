@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export function BrandStorySection() {
   return (
-    <section className="container mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16 lg:py-20 xl:py-24">
+    <section className="container mx-auto px-4 md:px-6 lg:px-8 py-20 md:py-24 lg:py-32">
       <div className="max-w-4xl mx-auto space-y-6 md:space-y-8 text-center">
         <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-serif font-medium">
           A Little About Suchaye

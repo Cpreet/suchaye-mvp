@@ -75,7 +75,7 @@ export function HeroSection({
         <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
           {/* Text Content */}
           <div className="text-center lg:text-left space-y-4 md:space-y-6 lg:space-y-8 order-2 lg:order-1">
-            <div className="space-y-3 md:space-y-4 lg:space-y-6">
+            <div className="space-y-3 md:space-y-4 lg:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 fill-mode-forwards">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-medium tracking-tight leading-[1.1] text-foreground">
                 {title}
               </h1>
@@ -83,11 +83,11 @@ export function HeroSection({
                 {subtitle}
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start items-center pt-2 md:pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start items-center pt-2 md:pt-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-forwards opacity-0">
               <Link to={primaryAction.href}>
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto px-6 md:px-8 py-4 md:py-6 text-sm md:text-base rounded-full font-medium shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] group"
+                  className="w-full sm:w-auto px-6 md:px-8 py-4 md:py-6 text-sm md:text-base rounded-full font-medium shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] group bg-[#4A3B32] text-white hover:bg-[#4A3B32]/90 border border-[#4A3B32]"
                 >
                   {primaryAction.label}
                   <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -110,7 +110,7 @@ export function HeroSection({
 
           {/* Image Gallery */}
           <div className="relative order-1 lg:order-2">
-            <div className="relative aspect-[3/4] w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto rounded-xl md:rounded-2xl overflow-hidden shadow-lg group">
+            <div className="relative aspect-3/4 w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto rounded-xl md:rounded-2xl overflow-hidden shadow-lg group">
               {/* Main Image */}
               <div className="absolute inset-0">
                 {lifestyleImages.map((image, index) => (
@@ -130,7 +130,7 @@ export function HeroSection({
                           "https://via.placeholder.com/600x800/faf5f0/b9805a?text=Suchaye";
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
                   </div>
                 ))}
               </div>

@@ -24,6 +24,7 @@ export interface BaseProduct {
   dispatchDays: number;
   isBestseller?: boolean;
   isNew?: boolean;
+  colors?: string[]; // Added for variant indicator
 }
 
 export interface JewelleryProduct extends BaseProduct {
@@ -90,6 +91,7 @@ export const jewelleryProducts: JewelleryProduct[] = [
     inStock: true,
     dispatchDays: 3,
     isBestseller: true,
+    colors: ["Gold", "Silver", "Rose Gold"],
   },
   {
     id: "jew-002",
@@ -134,6 +136,7 @@ export const jewelleryProducts: JewelleryProduct[] = [
       "Store in a dry pouch, avoid water and perfumes directly on the metal, and wipe gently with a soft cloth after wear.",
     inStock: true,
     dispatchDays: 3,
+    colors: ["Gold", "Silver"],
   },
   {
     id: "jew-004",
@@ -330,7 +333,7 @@ export const jewelleryProducts: JewelleryProduct[] = [
     weight: "10g",
     careInstructions:
       "Store in a dry pouch, avoid water and perfumes directly on the metal, and wipe gently with a soft cloth after wear.",
-    inStock: true,
+    inStock: false,
     dispatchDays: 3,
   },
 ];
@@ -651,6 +654,7 @@ export const bagProducts: BagProduct[] = [
     inStock: true,
     dispatchDays: 5,
     isBestseller: true,
+    colors: ["Natural", "Grey", "Black"],
   },
   {
     id: "bag-002",
@@ -675,6 +679,7 @@ export const bagProducts: BagProduct[] = [
     inStock: true,
     dispatchDays: 5,
     isNew: true,
+    colors: ["Olive", "Beige", "Navy"],
   },
   {
     id: "bag-003",
@@ -721,6 +726,7 @@ export const bagProducts: BagProduct[] = [
     inStock: true,
     dispatchDays: 5,
     isBestseller: true,
+    colors: ["Tan", "Black"],
   },
 ];
 
@@ -749,4 +755,3 @@ export function getBestsellers(): Product[] {
 export function getNewProducts(): Product[] {
   return allProducts.filter((p) => p.isNew);
 }
-

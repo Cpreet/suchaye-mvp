@@ -1,8 +1,12 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import type { Product } from "@/data/products";
 import { cn } from "@/lib/utils";
+import { Star, Minus, Plus } from "lucide-react";
+import { addToCart, updateCartItemQuantity } from "@/lib/cart";
+import { useCart } from "@/hooks/use-cart";
 
 interface ProductCardProps {
   product: Product;
@@ -10,66 +14,179 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className }: ProductCardProps) {
+  const navigate = useNavigate();
+  const cart = useCart();
+  
+  const cartItem = cart.items.find((item) => item.productId === product.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+  const isSoldOut = !product.inStock;
+
   const formatPrice = (price: number) => {
     return `₹${price.toLocaleString("en-IN")}`;
   };
 
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product.id, 1);
+    window.dispatchEvent(new Event("cart-updated"));
+  };
+
+  const handleIncrement = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product.id, 1);
+    window.dispatchEvent(new Event("cart-updated"));
+  };
+
+  const handleDecrement = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    updateCartItemQuantity(product.id, quantity - 1);
+    window.dispatchEvent(new Event("cart-updated"));
+  };
+
+  const handleBuyNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (quantity === 0) {
+      addToCart(product.id, 1);
+      window.dispatchEvent(new Event("cart-updated"));
+    }
+    navigate("/checkout");
+  };
+
+  const variantCount = product.colors?.length || 0;
+  const variantLabel = variantCount > 0 ? `${variantCount} Colors` : null;
+
   return (
-    <Link to={`/${product.category}/${product.slug}`}>
+    <Link to={`/${product.category}/${product.slug}`} className={cn("block h-full", isSoldOut && "opacity-75")}>
       <Card
         className={cn(
-          "group overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 md:hover:-translate-y-2 border-0 shadow-sm bg-card",
+          "group h-full overflow-hidden transition-all duration-500 border border-transparent hover:border-primary/20 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-card flex flex-col",
           className
         )}
       >
-        <div className="aspect-[3/4] w-full overflow-hidden bg-muted/30 relative">
+        <div className="aspect-3/4 w-full overflow-hidden bg-muted/30 relative">
+          {/* Primary Image */}
           <img
             src={product.images[0] || "/placeholder.jpg"}
             alt={product.name}
-            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110"
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 opacity-100 group-hover:opacity-0"
             onError={(e) => {
               (e.target as HTMLImageElement).src =
                 "https://via.placeholder.com/400x500?text=Suchaye";
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {/* Secondary Image */}
+          <img
+            src={product.images[1] || product.images[0] || "/placeholder.jpg"}
+            alt={`${product.name} view 2`}
+            className="absolute inset-0 h-full w-full object-cover transition-all duration-500 opacity-0 scale-105 group-hover:scale-100 group-hover:opacity-100"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                "https://via.placeholder.com/400x500?text=Suchaye";
+            }}
+          />
+          
+          {/* Badges */}
+          <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+            {isSoldOut ? (
+              <Badge variant="destructive" className="shadow-sm">
+                Sold Out
+              </Badge>
+            ) : (
+              <>
+                {product.isBestseller && (
+                  <Badge variant="secondary" className="bg-white/90 hover:bg-white text-foreground shadow-sm backdrop-blur-sm">
+                    Bestseller
+                  </Badge>
+                )}
+                {product.isNew && (
+                  <Badge variant="default" className="shadow-sm">
+                    New
+                  </Badge>
+                )}
+              </>
+            )}
+          </div>
+
+          {/* Variant Indicator */}
+          {variantLabel && !isSoldOut && (
+            <div className="absolute bottom-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded-full backdrop-blur-md z-10">
+              {variantLabel}
+            </div>
+          )}
         </div>
-        <CardContent className="p-3 md:p-4 lg:p-5 space-y-1.5 md:space-y-2">
-          <div className="flex items-start justify-between gap-2 md:gap-3">
-            <div className="flex-1 min-w-0 space-y-0.5 md:space-y-1">
-              <h3 className="text-base md:text-lg lg:text-xl font-medium text-foreground truncate leading-tight">
-                {product.name}
-              </h3>
-              <p className="text-base md:text-lg lg:text-xl font-semibold text-foreground">
+
+        <CardContent className="p-4 flex flex-col gap-2 flex-grow">
+          {/* Star Rating */}
+          <div className="flex items-center gap-0.5">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star key={star} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+            ))}
+            <span className="text-xs text-muted-foreground ml-1">(4.8)</span>
+          </div>
+
+          <div className="space-y-1">
+            <h3 className="font-serif text-base md:text-lg font-medium text-foreground leading-tight group-hover:text-primary transition-colors">
+              {product.name}
+            </h3>
+            
+            <div className="flex items-center justify-between">
+              <p className="font-medium text-foreground">
                 {formatPrice(product.price)}
               </p>
-            </div>
-            <div className="flex flex-col gap-0.5 md:gap-1 shrink-0">
-              {product.isBestseller && (
-                <Badge variant="secondary" className="shrink-0 text-[10px] md:text-xs font-medium px-1.5 md:px-2 py-0.5">
-                  Bestseller
-                </Badge>
-              )}
-              {product.isNew && (
-                <Badge variant="default" className="shrink-0 text-[10px] md:text-xs font-medium px-1.5 md:px-2 py-0.5">
-                  New
-                </Badge>
-              )}
+              <p className="text-xs text-muted-foreground capitalize font-light">
+                {product.category === "candle" ? product.scentFamily : product.category === "jewellery" ? product.type : "Accessory"}
+              </p>
             </div>
           </div>
-          {product.category === "candle" && (
-            <p className="text-xs md:text-sm text-muted-foreground mt-1 md:mt-2 capitalize font-light">
-              {product.scentFamily}
-            </p>
-          )}
-          {product.category === "jewellery" && (
-            <p className="text-xs md:text-sm text-muted-foreground mt-1 md:mt-2 capitalize font-light">
-              {product.type}
-            </p>
+
+          {!isSoldOut && (
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-2 mt-2 pt-2">
+              {quantity > 0 ? (
+                <div className="flex items-center justify-between bg-secondary/50 rounded-md h-9 px-1 w-full border border-input" onClick={(e) => e.preventDefault()}>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-7 w-7 hover:bg-background rounded-sm"
+                    onClick={handleDecrement}
+                  >
+                    <Minus className="h-3 w-3" />
+                  </Button>
+                  <span className="text-sm font-medium">{quantity}</span>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-7 w-7 hover:bg-background rounded-sm"
+                    onClick={handleIncrement}
+                  >
+                    <Plus className="h-3 w-3" />
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  size="sm"
+                  onClick={handleAddToCart}
+                  variant="outline"
+                  className="w-full text-xs font-medium h-9 hover:bg-secondary/80 hover:text-secondary-foreground"
+                >
+                  Add to Cart
+                </Button>
+              )}
+              
+              <Button
+                size="sm"
+                onClick={handleBuyNow}
+                className="w-full text-xs font-medium h-9 bg-[#4A3B32] text-white hover:bg-[#4A3B32]/90"
+              >
+                Buy Now
+              </Button>
+            </div>
           )}
         </CardContent>
       </Card>
     </Link>
   );
 }
-

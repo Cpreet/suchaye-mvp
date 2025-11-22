@@ -1,28 +1,29 @@
-import { useParams, Link } from "react-router";
-import { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router";
+import { useState } from "react";
 import { getProductBySlug } from "@/data/products";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductInfoBlock } from "@/components/product/product-info-block";
 import { ProductSpecs } from "@/components/product/product-specs";
-import { QuantitySelector } from "@/components/cart/quantity-selector";
 import { Button } from "@/components/ui/button";
-import { addToCart } from "@/lib/cart";
+import { addToCart, updateCartItemQuantity } from "@/lib/cart";
 import { Section } from "@/components/sections/section";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Minus, Plus } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
 
 export function JewelleryDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
-
+  const navigate = useNavigate();
+  const cart = useCart();
+  
   const product = slug ? getProductBySlug(slug) : null;
+  const cartItem = product ? cart.items.find((item) => item.productId === product.id) : null;
+  const quantityInCart = cartItem ? cartItem.quantity : 0;
 
-  useEffect(() => {
-    if (addedToCart) {
-      const timer = setTimeout(() => setAddedToCart(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [addedToCart]);
+  // Variant selection state
+  const [selectedColor, setSelectedColor] = useState<string>(
+    product?.colors?.[0] || ""
+  );
 
   if (!product || product.category !== "jewellery") {
     return (
@@ -38,17 +39,41 @@ export function JewelleryDetailPage() {
   }
 
   const handleAddToCart = () => {
-    addToCart(product.id, quantity);
-    setAddedToCart(true);
-    window.dispatchEvent(new Event("cartUpdated"));
+    addToCart(product.id, 1);
+    window.dispatchEvent(new Event("cart-updated"));
   };
+
+  const handleIncrement = () => {
+    addToCart(product.id, 1);
+    window.dispatchEvent(new Event("cart-updated"));
+  };
+
+  const handleDecrement = () => {
+    updateCartItemQuantity(product.id, quantityInCart - 1);
+    window.dispatchEvent(new Event("cart-updated"));
+  };
+
+  const handleBuyNow = () => {
+    if (quantityInCart === 0) {
+      addToCart(product.id, 1);
+      window.dispatchEvent(new Event("cart-updated"));
+    }
+    navigate("/checkout");
+  };
+
+  const isSoldOut = !product.inStock;
 
   return (
     <Section className="max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
         {/* Gallery */}
-        <div>
+        <div className="relative">
           <ProductGallery images={product.images} productName={product.name} />
+          {isSoldOut && (
+            <div className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-sm font-medium z-10">
+              Sold Out
+            </div>
+          )}
         </div>
 
         {/* Info */}
@@ -56,34 +81,77 @@ export function JewelleryDetailPage() {
           <ProductInfoBlock product={product} />
           <ProductSpecs product={product} />
 
-          {/* Add to Cart */}
-          <div className="space-y-3 md:space-y-4 pt-4 md:pt-6 border-t">
-            <div className="flex items-center gap-3 md:gap-4">
-              <span className="text-xs md:text-sm font-medium">Quantity:</span>
-              <QuantitySelector
-                value={quantity}
-                onChange={setQuantity}
-                min={1}
-              />
+          {/* Variant Selector */}
+          {product.colors && product.colors.length > 0 && (
+            <div className="space-y-3 pt-2">
+              <span className="text-sm font-medium text-muted-foreground">Select Color:</span>
+              <div className="flex flex-wrap gap-2">
+                {product.colors.map((color) => (
+                  <button
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    className={cn(
+                      "px-4 py-2 rounded-full text-sm border transition-all",
+                      selectedColor === color
+                        ? "border-primary bg-primary/10 text-primary font-medium"
+                        : "border-input hover:border-primary/50 text-muted-foreground"
+                    )}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <Button
-                onClick={handleAddToCart}
-                className="flex-1 text-sm md:text-base"
-                size="lg"
-                disabled={!product.inStock}
-              >
-                <ShoppingCart className="mr-2 h-3.5 w-3.5 md:h-4 md:w-4" />
-                {addedToCart ? "Added to Cart!" : "Add to Cart"}
-              </Button>
-              <Link to="/cart" className="flex-1">
-                <Button variant="outline" size="lg" className="w-full text-sm md:text-base">
+          )}
+
+          {/* Actions */}
+          <div className="space-y-3 md:space-y-4 pt-4 md:pt-6 border-t">
+            {!isSoldOut ? (
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                {quantityInCart > 0 ? (
+                  <div className="flex items-center justify-between bg-secondary/50 rounded-md h-11 px-2 border border-input">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 hover:bg-background rounded-sm"
+                      onClick={handleDecrement}
+                    >
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="text-base font-medium">{quantityInCart}</span>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 hover:bg-background rounded-sm"
+                      onClick={handleIncrement}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={handleAddToCart}
+                    className="w-full text-sm md:text-base h-11"
+                    size="lg"
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    Add to Cart
+                  </Button>
+                )}
+                
+                <Button 
+                  onClick={handleBuyNow}
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full text-sm md:text-base h-11"
+                >
                   Buy Now
                 </Button>
-              </Link>
-            </div>
-            {!product.inStock && (
-              <p className="text-xs md:text-sm text-destructive">Out of stock</p>
+              </div>
+            ) : (
+              <div className="w-full bg-muted py-3 text-center rounded-md text-muted-foreground font-medium">
+                Currently Unavailable
+              </div>
             )}
           </div>
         </div>
@@ -91,4 +159,3 @@ export function JewelleryDetailPage() {
     </Section>
   );
 }
-
