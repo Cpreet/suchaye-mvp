@@ -35,7 +35,7 @@ const categories: Category[] = [
 
 export function CategoryTilesSection() {
   return (
-    <section className="container mx-auto px-4 md:px-6 lg:px-8 py-20 md:py-24 lg:py-32">
+    <section className="container mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
       <div className="flex flex-col space-y-2 mb-8 md:mb-12 lg:mb-16 text-center md:text-left">
         <h2 className="text-3xl md:text-4xl font-serif font-medium">Shop by Category</h2>
         <p className="text-muted-foreground">Explore our curated collections.</p>

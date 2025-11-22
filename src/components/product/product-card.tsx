@@ -146,20 +146,20 @@ export function ProductCard({ product, className }: ProductCardProps) {
           {!isSoldOut && (
             <div className="flex flex-col md:grid md:grid-cols-2 gap-2 mt-2 pt-2">
               {quantity > 0 ? (
-                <div className="flex items-center justify-between bg-secondary/50 rounded-md h-9 px-1 w-full border border-input" onClick={(e) => e.preventDefault()}>
+                <div className="flex items-center justify-between bg-background rounded-full h-9 px-1 w-full border border-muted-foreground/20 shadow-sm" onClick={(e) => e.preventDefault()}>
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-7 w-7 hover:bg-background rounded-sm"
+                    className="h-7 w-7 hover:bg-muted/50 rounded-full text-muted-foreground"
                     onClick={handleDecrement}
                   >
                     <Minus className="h-3 w-3" />
                   </Button>
-                  <span className="text-sm font-medium">{quantity}</span>
+                  <span className="text-sm font-medium tabular-nums">{quantity}</span>
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-7 w-7 hover:bg-background rounded-sm"
+                    className="h-7 w-7 hover:bg-muted/50 rounded-full text-muted-foreground"
                     onClick={handleIncrement}
                   >
                     <Plus className="h-3 w-3" />
@@ -170,7 +170,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
                   size="sm"
                   onClick={handleAddToCart}
                   variant="outline"
-                  className="w-full text-xs font-medium h-9 hover:bg-secondary/80 hover:text-secondary-foreground"
+                  className="w-full text-xs font-medium h-9 rounded-full border-muted-foreground/20 hover:border-primary hover:text-primary hover:bg-background transition-colors"
                 >
                   Add to Cart
                 </Button>
@@ -179,7 +179,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
               <Button
                 size="sm"
                 onClick={handleBuyNow}
-                className="w-full text-xs font-medium h-9 bg-[#4A3B32] text-white hover:bg-[#4A3B32]/90"
+                className="w-full text-xs font-medium h-9 bg-[#4A3B32] text-white hover:bg-[#4A3B32]/90 rounded-full shadow-md hover:shadow-lg transition-all"
               >
                 Buy Now
               </Button>

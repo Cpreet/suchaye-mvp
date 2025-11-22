@@ -71,7 +71,7 @@ export function HeroSection({
 
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12 lg:py-24">
+      <div className="container mx-auto px-4 md:px-6 py-4 md:py-8 lg:py-12">
         <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
           {/* Text Content */}
           <div className="text-center lg:text-left space-y-4 md:space-y-6 lg:space-y-8 order-2 lg:order-1">

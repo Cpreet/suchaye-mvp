@@ -108,20 +108,20 @@ export function BagDetailPage() {
             {!isSoldOut ? (
               <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {quantityInCart > 0 ? (
-                  <div className="flex items-center justify-between bg-secondary/50 rounded-md h-11 px-2 border border-input">
+                  <div className="flex items-center justify-between bg-background rounded-full h-11 px-2 border border-muted-foreground/20 shadow-sm">
                     <Button
                       size="icon"
                       variant="ghost"
-                      className="h-8 w-8 hover:bg-background rounded-sm"
+                      className="h-8 w-8 hover:bg-muted/50 rounded-full text-muted-foreground"
                       onClick={handleDecrement}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
-                    <span className="text-base font-medium">{quantityInCart}</span>
+                    <span className="text-base font-medium tabular-nums">{quantityInCart}</span>
                     <Button
                       size="icon"
                       variant="ghost"
-                      className="h-8 w-8 hover:bg-background rounded-sm"
+                      className="h-8 w-8 hover:bg-muted/50 rounded-full text-muted-foreground"
                       onClick={handleIncrement}
                     >
                       <Plus className="h-4 w-4" />
@@ -130,7 +130,8 @@ export function BagDetailPage() {
                 ) : (
                   <Button
                     onClick={handleAddToCart}
-                    className="w-full text-sm md:text-base h-11"
+                    variant="outline"
+                    className="w-full text-sm md:text-base h-11 rounded-full border-muted-foreground/20 hover:border-primary hover:text-primary hover:bg-background transition-colors"
                     size="lg"
                   >
                     <ShoppingCart className="mr-2 h-4 w-4" />
@@ -140,9 +141,8 @@ export function BagDetailPage() {
                 
                 <Button 
                   onClick={handleBuyNow}
-                  variant="outline" 
                   size="lg" 
-                  className="w-full text-sm md:text-base h-11"
+                  className="w-full text-sm md:text-base h-11 bg-[#4A3B32] text-white hover:bg-[#4A3B32]/90 rounded-full shadow-md hover:shadow-lg transition-all border-none"
                 >
                   Buy Now
                 </Button>

@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { CategoryTilesSection } from "@/components/sections/category-tiles-section";
 import { BestsellersSection } from "@/components/sections/bestsellers-section";
 import { BrandStorySection } from "@/components/sections/brand-story-section";
+import { MarqueeSection } from "@/components/sections/marquee-section";
 
 export function HomePage() {
   return (
@@ -18,6 +19,7 @@ export function HomePage() {
           href: "/candles",
         }}
       />
+      <MarqueeSection />
       <CategoryTilesSection />
       <BestsellersSection />
       <BrandStorySection />
