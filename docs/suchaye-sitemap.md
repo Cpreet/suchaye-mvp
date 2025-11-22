@@ -7,6 +7,8 @@
 - `/jewellery/[slug]`→ Jewellery Product Detail
 - `/candles`         → Candle Listing
 - `/candles/[slug]`  → Candle Product Detail
+- `/bags`            → Bag Listing
+- `/bags/[slug]`     → Bag Product Detail
 - `/cart`            → Cart
 - `/checkout`        → Checkout
 - `/about`           → About
@@ -18,21 +20,21 @@
 ## 2. Home (`/`)
 
 **Purpose:**  
-Introduce Suchaye, clearly split users into two paths (Jewellery / Candles), and showcase a few bestsellers.
+Introduce Suchaye, clearly split users into three paths (Jewellery / Candles / Bags), and showcase a few bestsellers.
 
 **URL:** `/`
 
 **Sections:**
 1. Hero (brand + main CTA buttons)
-2. Category tiles (Jewellery, Candles)
+2. Category tiles (Jewellery, Candles, Bags)
 3. Bestsellers (mixed or split)
 4. Brand story snippet
 5. Footer
 
 **SEO:**
-- Title: `Suchaye — Handcrafted Jewellery & Scented Candles by Vibhuti`
+- Title: `Suchaye — Handcrafted Jewellery, Scented Candles & Bags by Vibhuti`
 - Meta description:  
-  `Discover handmade jewellery and scented candles by Suchaye. Thoughtful designs, small-batch craft, and warm, slow-made pieces for you and your home.`
+  `Discover handmade jewellery, scented candles, and bags by Suchaye. Thoughtful designs, small-batch craft, and warm, slow-made pieces for you and your home.`
 
 ---
 
@@ -127,7 +129,52 @@ Example: `/candles/lavender-fields-soy-candle`
 
 ---
 
-## 7. Cart (`/cart`)
+## 7. Bag Listing (`/bags`)
+
+**Purpose:**  
+Allow users to browse all bags with basic filtering.
+
+**URL:** `/bags`
+
+**Sections:**
+1. Page hero (title + short intro)
+2. Filters (Type, Material)
+3. Product grid
+4. Pagination or "Load more"
+
+**SEO:**
+- Title: `Handmade Bags — Suchaye`
+- Meta description:  
+  `Shop handmade bags by Suchaye. Thoughtfully crafted totes, crossbody bags, clutches and more, made with care and attention to detail.`
+
+---
+
+## 8. Bag Product Detail (`/bags/[slug]`)
+
+**Purpose:**  
+Deep-dive into a single bag and convert.
+
+**URL pattern:**  
+`/bags/[slug]`  
+Example: `/bags/linen-tote-bag`
+
+**Content blocks:**
+- Image gallery
+- Title, price
+- Description
+- Key specs (material, dimensions, closure, strap length, lining)
+- Care instructions
+- Dispatch info
+- Add to Cart / Buy Now
+
+**SEO:**
+- Title: `[Product Name] — Handmade Bag by Suchaye`
+- Meta description pattern:  
+  `[Product Name] by Suchaye. Handmade [type] bag crafted in [material], perfect for [usage]. Shop handmade bags online.`
+
+---
+
+## 9. Cart (`/cart`)
 
 **Purpose:**  
 Review and adjust order before checkout.
@@ -143,11 +190,11 @@ Review and adjust order before checkout.
 **SEO:**
 - Title: `Your Cart — Suchaye`
 - Meta description:  
-  `Review your handmade jewellery and candles from Suchaye before checkout.`
+  `Review your handmade jewellery, candles, and bags from Suchaye before checkout.`
 
 ---
 
-## 8. Checkout (`/checkout`)
+## 10. Checkout (`/checkout`)
 
 **Purpose:**  
 Collect address and payment details and confirm order.
@@ -164,11 +211,11 @@ Collect address and payment details and confirm order.
 **SEO:**
 - Title: `Checkout — Suchaye`
 - Meta description:  
-  `Complete your purchase of handmade jewellery and candles from Suchaye.`
+  `Complete your purchase of handmade jewellery, candles, and bags from Suchaye.`
 
 ---
 
-## 9. About (`/about`)
+## 11. About (`/about`)
 
 **Purpose:**  
 Share brand story, values, and the person behind Suchaye.
@@ -178,11 +225,11 @@ Share brand story, values, and the person behind Suchaye.
 **SEO:**
 - Title: `About Suchaye — Handcrafted by Vibhuti`
 - Meta description:  
-  `Learn about Suchaye, a handcrafted jewellery and candle studio by Vibhuti. Small-batch creations, made with care and intention.`
+  `Learn about Suchaye, a handcrafted jewellery, candle, and bag studio by Vibhuti. Small-batch creations, made with care and intention.`
 
 ---
 
-## 10. Contact (`/contact`)
+## 12. Contact (`/contact`)
 
 **Purpose:**  
 Provide simple channels to reach out.
@@ -192,11 +239,11 @@ Provide simple channels to reach out.
 **SEO:**
 - Title: `Contact — Suchaye`
 - Meta description:  
-  `Have a question about our handmade jewellery or candles? Contact the Suchaye team.`
+  `Have a question about our handmade jewellery, candles, or bags? Contact the Suchaye team.`
 
 ---
 
-## 11. Policies (`/policies`)
+## 13. Policies (`/policies`)
 
 **Purpose:**  
 Centralized legal and policy information.
@@ -212,5 +259,5 @@ Centralized legal and policy information.
 **SEO:**
 - Title: `Shipping, Returns & Policies — Suchaye`
 - Meta description:  
-  `Read about shipping, returns, and policies for Suchaye’s handmade jewellery and candles.`
+  `Read about shipping, returns, and policies for Suchaye's handmade jewellery, candles, and bags.`
 

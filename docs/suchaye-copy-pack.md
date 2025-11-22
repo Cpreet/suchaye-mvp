@@ -24,11 +24,12 @@ Tone keywords:
 Suchaye
 
 **Subheading:**  
-Handcrafted jewellery and candles that feel like little rituals of care.
+Handcrafted jewellery, candles, and bags that feel like little rituals of care.
 
 **Primary CTAs:**  
 - `Shop Jewellery`
 - `Shop Candles`
+- `Shop Bags`
 
 ---
 
@@ -56,6 +57,17 @@ Slow-burning, scented candles to soften your evenings and brighten your corners.
 
 ---
 
+**Bags tile — heading:**  
+Handmade Bags
+
+**Bags tile — description:**  
+Thoughtfully crafted bags for everyday adventures, made with care and attention to detail.
+
+**Bags tile — CTA:**  
+`Explore Bags`
+
+---
+
 ### 2.3 Bestsellers Section
 
 **Section heading:**  
@@ -72,7 +84,7 @@ A small curation of Suchaye pieces that keep finding their way into people’s c
 A Little About Suchaye
 
 **Body (short):**  
-Suchaye began as a small experiment at a home worktable — a place where metal, wax, scent and stories came together. Every piece is designed and finished by hand, in small batches, with an emphasis on comfort, longevity and a little bit of quiet joy. When you bring a Suchaye piece home, you’re choosing something that was made slowly, intentionally, and just for you.
+Suchaye began as a small experiment at a home worktable — a place where metal, wax, fabric, scent and stories came together. Every piece is designed and finished by hand, in small batches, with an emphasis on comfort, longevity and a little bit of quiet joy. When you bring a Suchaye piece home, you're choosing something that was made slowly, intentionally, and just for you.
 
 ---
 
@@ -100,11 +112,23 @@ These are the candles you reach for when you want the day to slow down a little.
 
 ---
 
-## 5. Product Description Templates
+## 5. Bags Listing Page (`/bags`)
+
+### 5.1 Page Hero
+
+**Title (H1):**  
+Handmade Bags by Suchaye
+
+**Intro paragraph:**  
+Thoughtfully crafted bags for everyday adventures. From roomy totes to compact crossbody bags, each piece is made by hand with attention to detail, quality materials, and a focus on both form and function.
+
+---
+
+## 6. Product Description Templates
 
 Use these as patterns you can customize for each SKU.
 
-### 5.1 Jewellery Product Template
+### 6.1 Jewellery Product Template
 
 **Structure:**
 
@@ -127,7 +151,7 @@ Use these as patterns you can customize for each SKU.
 
 ---
 
-### 5.2 Candle Product Template
+### 6.2 Candle Product Template
 
 **Structure:**
 
@@ -159,7 +183,32 @@ Use these as patterns you can customize for each SKU.
 
 ---
 
-## 6. About Page (`/about`)
+### **6.3 Bag Product Template**
+
+**Structure:**
+
+1. Short hook (1–2 sentences)
+2. Material & feel
+3. How/where to use
+4. Care
+
+**Template:**
+
+> [Product Name] is a [type, e.g., "roomy tote bag"] crafted in [material, e.g., "natural linen with leather straps"]. Designed to be both practical and beautiful, it's the kind of bag that becomes a daily companion — sturdy enough for your essentials, light enough to carry all day.  
+>  
+> Perfect for [usage suggestion, e.g., "weekend markets, work commutes, or day trips"], this bag balances function with a quiet, understated style.  
+>  
+> **Materials:** [material details]  
+> **Dimensions:** [L x W x H]  
+> **Closure:** [closure type]  
+> **Strap length:** [if applicable]  
+> **Lining:** [lining material]  
+>  
+> **Care:** Spot clean with a damp cloth, air dry. For deeper cleaning, hand wash gently in cold water and lay flat to dry. Avoid machine washing and direct heat.
+
+---
+
+## 7. About Page (`/about`)
 
 **Heading:**  
 The Story Behind Suchaye
@@ -168,15 +217,15 @@ The Story Behind Suchaye
 
 > Suchaye is a small, homegrown studio built around the idea that the objects we live with should feel personal. It started with a single worktable, a handful of tools, and the urge to make things slowly — by hand, in small quantities, and with attention to the tiniest details.  
 >  
-> Every earring, pendant and candle is designed by Vibhuti and crafted in small batches. No mass production, no rush. Just honest materials, considered forms, and scents that feel familiar in the best way.  
+> Every earring, pendant, candle, and bag is designed by Vibhuti and crafted in small batches. No mass production, no rush. Just honest materials, considered forms, and scents that feel familiar in the best way.  
 >  
-> When you choose Suchaye, you’re supporting a slower way of making: one that honours time, touch and the quiet joy of a well-made object.
+> When you choose Suchaye, you're supporting a slower way of making: one that honours time, touch and the quiet joy of a well-made object.
 
 You can optionally add a small “Made in [City/Region]” line at the end.
 
 ---
 
-## 7. Contact Page (`/contact`)
+## 8. Contact Page (`/contact`)
 
 **Heading:**  
 We’d Love to Hear From You
@@ -195,7 +244,7 @@ We’d Love to Hear From You
 
 ---
 
-## 8. Policies (`/policies`)
+## 9. Policies (`/policies`)
 
 These are starter snippets; you should tune them to your actual operations.
 
@@ -229,7 +278,7 @@ These are starter snippets; you should tune them to your actual operations.
 
 ---
 
-## 9. Microcopy & Labels
+## 10. Microcopy & Labels
 
 A few reusable labels/buttons:
 

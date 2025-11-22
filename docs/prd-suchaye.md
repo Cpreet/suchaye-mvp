@@ -3,16 +3,17 @@
 **Project:** Suchaye
 **Version:** MVP
 **Owner:** Charanpreet
-**Brand:** Handmade Jewellery & Handmade Candles by Vibhuti
+**Brand:** Handmade Jewellery, Handmade Candles & Handmade Bags by Vibhuti
 
 ---
 
 ## **1. Product Summary**
 
-Suchaye is a handcrafted lifestyle brand offering two product lines:
+Suchaye is a handcrafted lifestyle brand offering three product lines:
 
 1. Handmade Jewellery
 2. Handmade Scented Candles
+3. Handmade Bags
 
 The MVP delivers a clean, minimal storefront where users can browse products, view details, add to cart, and checkout via Razorpay.
 
@@ -35,7 +36,7 @@ The MVP solves these issues by providing a structured, user-friendly e-commerce 
 
 ### **Primary Goals**
 
-* Establish two clear product categories: Jewellery and Candles
+* Establish three clear product categories: Jewellery, Candles, and Bags
 * Provide listing pages + product detail pages
 * Implement cart and checkout
 * Ensure mobile-first responsive design
@@ -87,6 +88,8 @@ The MVP solves these issues by providing a structured, user-friendly e-commerce 
 * `/jewellery/[slug]` — Jewellery Product Detail
 * `/candles` — Candle Listing
 * `/candles/[slug]` — Candle Product Detail
+* `/bags` — Bag Listing
+* `/bags/[slug]` — Bag Product Detail
 * `/cart` — Cart
 * `/checkout` — Checkout
 * `/about` — About
@@ -95,7 +98,7 @@ The MVP solves these issues by providing a structured, user-friendly e-commerce 
 
 ### **Header Navigation**
 
-Home | Jewellery | Candles | About | Contact
+Home | Jewellery | Candles | Bags | About | Contact
 
 ---
 
@@ -108,7 +111,7 @@ Home | Jewellery | Candles | About | Contact
 **Sections:**
 
 * Hero (brand name + subheading)
-* Category tiles (Jewellery, Candles)
+* Category tiles (Jewellery, Candles, Bags)
 * Bestsellers (3–6 items)
 * Brand story teaser
 * Footer
@@ -191,7 +194,42 @@ Home | Jewellery | Candles | About | Contact
 
 ---
 
-### **7.6 Cart — `/cart`**
+### **7.6 Bag Listing — `/bags`**
+
+**Features:**
+
+* Grid layout
+* Filters:
+  * Type (Tote, Crossbody, Clutch, Backpack)
+  * Material (Cotton, Linen, Leather, Canvas)
+* Product cards (image, name, price, type)
+
+---
+
+### **7.7 Bag Product Detail — `/bags/[slug]`**
+
+**Content Requirements:**
+
+* Image gallery
+* Name + Price
+* Description
+* Specs:
+  * Material
+  * Dimensions (L x W x H)
+  * Closure type
+  * Strap length (if applicable)
+  * Lining material
+* Care instructions
+* Dispatch time
+
+**Actions:**
+
+* Add to Cart
+* Adjust quantity
+
+---
+
+### **7.8 Cart — `/cart`**
 
 **Features:**
 
@@ -203,7 +241,7 @@ Home | Jewellery | Candles | About | Contact
 
 ---
 
-### **7.7 Checkout — `/checkout`**
+### **7.9 Checkout — `/checkout`**
 
 **Fields:**
 
@@ -219,7 +257,7 @@ Home | Jewellery | Candles | About | Contact
 
 ---
 
-### **7.8 About Page — `/about`**
+### **7.10 About Page — `/about`**
 
 **Content:**
 
@@ -229,7 +267,7 @@ Home | Jewellery | Candles | About | Contact
 
 ---
 
-### **7.9 Contact Page — `/contact`**
+### **7.11 Contact Page — `/contact`**
 
 **Features:**
 
@@ -239,7 +277,7 @@ Home | Jewellery | Candles | About | Contact
 
 ---
 
-### **7.10 Policies — `/policies`**
+### **7.12 Policies — `/policies`**
 
 **Includes:**
 
@@ -256,6 +294,7 @@ Home | Jewellery | Candles | About | Contact
 
 * Jewellery: 6–10
 * Candles: 4–8
+* Bags: 4–6
 
 ### **Photography**
 
@@ -294,7 +333,7 @@ Home | Jewellery | Candles | About | Contact
 
 ## **10. Acceptance Criteria**
 
-* Users can browse jewellery and candles independently
+* Users can browse jewellery, candles, and bags independently
 * Product detail pages show all required info
 * Cart updates correctly
 * Razorpay checkout completes successfully

@@ -12,6 +12,7 @@ src/
     home/
     jewellery/
     candles/
+    bags/
     cart/
     checkout/
     about/
@@ -470,6 +471,20 @@ Each route primarily composes the components above:
   * `<ProductGallery />`
   * `<ProductInfoBlock />`
   * `<ProductSpecs />` with candle fields
+
+* `BagsListingPage`:
+
+  * `<PageShell />`
+  * `<BagFilterBar />` (or similar filter component)
+  * `<ProductGrid />`
+
+* `BagDetailPage`:
+
+  * `<ProductGallery />`
+  * `<ProductInfoBlock />`
+  * `<ProductSpecs />` with bag fields
+  * `<QuantitySelector />`
+  * Add to Cart button
 
 * `CartPage`:
 

@@ -1,12 +1,16 @@
 // Dummy product data for Suchaye MVP
 
-export type ProductCategory = "jewellery" | "candle";
+export type ProductCategory = "jewellery" | "candle" | "bag";
 
 export type JewelleryType = "earrings" | "necklaces" | "bracelets" | "rings";
 
 export type ScentFamily = "floral" | "fresh" | "woody" | "sweet";
 
 export type CandleSize = "S" | "M" | "L";
+
+export type BagType = "tote" | "crossbody" | "clutch" | "backpack";
+
+export type BagMaterial = "cotton" | "linen" | "leather" | "canvas";
 
 export interface BaseProduct {
   id: string;
@@ -48,7 +52,18 @@ export interface CandleProduct extends BaseProduct {
   safetyInstructions: string;
 }
 
-export type Product = JewelleryProduct | CandleProduct;
+export interface BagProduct extends BaseProduct {
+  category: "bag";
+  type: BagType;
+  material: BagMaterial;
+  dimensions: string; // e.g., "35cm x 40cm x 15cm"
+  closure: string; // e.g., "Zipper", "Magnetic snap", "Drawstring"
+  strapLength?: string; // e.g., "Adjustable 50-60cm"
+  lining: string; // e.g., "Cotton lining"
+  careInstructions: string;
+}
+
+export type Product = JewelleryProduct | CandleProduct | BagProduct;
 
 // Dummy jewellery products
 export const jewelleryProducts: JewelleryProduct[] = [
@@ -610,10 +625,110 @@ export const candleProducts: CandleProduct[] = [
   },
 ];
 
+// Dummy bag products
+export const bagProducts: BagProduct[] = [
+  {
+    id: "bag-001",
+    name: "Natural Linen Tote Bag",
+    slug: "natural-linen-tote-bag",
+    price: 2499,
+    images: [
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+      "https://images.unsplash.com/photo-1594223274512-ad2e1593e7b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+    ],
+    description:
+      "A roomy tote bag crafted in natural linen with leather straps. Designed to be both practical and beautiful, it's the kind of bag that becomes a daily companion — sturdy enough for your essentials, light enough to carry all day. Perfect for weekend markets, work commutes, or day trips.",
+    category: "bag",
+    type: "tote",
+    material: "linen",
+    dimensions: "35cm x 40cm x 15cm",
+    closure: "Open top with magnetic snap",
+    strapLength: "Adjustable 50-60cm",
+    lining: "Cotton lining",
+    careInstructions:
+      "Spot clean with a damp cloth, air dry. For deeper cleaning, hand wash gently in cold water and lay flat to dry. Avoid machine washing and direct heat.",
+    inStock: true,
+    dispatchDays: 5,
+    isBestseller: true,
+  },
+  {
+    id: "bag-002",
+    name: "Canvas Crossbody Bag",
+    slug: "canvas-crossbody-bag",
+    price: 1899,
+    images: [
+      "https://images.unsplash.com/photo-1594633312681-425a7b9568e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+    ],
+    description:
+      "A compact crossbody bag in durable canvas with a soft leather strap. Just the right size for your essentials — phone, wallet, keys, and a small notebook. The adjustable strap makes it comfortable to wear, and the zippered closure keeps everything secure.",
+    category: "bag",
+    type: "crossbody",
+    material: "canvas",
+    dimensions: "20cm x 15cm x 5cm",
+    closure: "Zipper",
+    strapLength: "Adjustable 90-110cm",
+    lining: "Cotton lining",
+    careInstructions:
+      "Spot clean with a damp cloth, air dry. For deeper cleaning, hand wash gently in cold water and lay flat to dry. Avoid machine washing and direct heat.",
+    inStock: true,
+    dispatchDays: 5,
+    isNew: true,
+  },
+  {
+    id: "bag-003",
+    name: "Cotton Clutch Bag",
+    slug: "cotton-clutch-bag",
+    price: 1299,
+    images: [
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+    ],
+    description:
+      "A simple, elegant clutch bag in soft cotton. Perfect for evenings out or when you want to travel light. The magnetic snap closure keeps your essentials secure, and the compact size fits comfortably in your hand or under your arm.",
+    category: "bag",
+    type: "clutch",
+    material: "cotton",
+    dimensions: "25cm x 18cm x 3cm",
+    closure: "Magnetic snap",
+    lining: "Cotton lining",
+    careInstructions:
+      "Spot clean with a damp cloth, air dry. For deeper cleaning, hand wash gently in cold water and lay flat to dry. Avoid machine washing and direct heat.",
+    inStock: true,
+    dispatchDays: 5,
+  },
+  {
+    id: "bag-004",
+    name: "Leather Backpack",
+    slug: "leather-backpack",
+    price: 3499,
+    images: [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+      "https://images.unsplash.com/photo-1594633312681-425a7b9568e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=500",
+    ],
+    description:
+      "A beautifully crafted leather backpack that combines style with functionality. Perfect for daily commutes, weekend trips, or when you need to carry a bit more. The adjustable straps ensure a comfortable fit, and the multiple compartments help keep everything organized.",
+    category: "bag",
+    type: "backpack",
+    material: "leather",
+    dimensions: "30cm x 40cm x 15cm",
+    closure: "Zipper",
+    strapLength: "Adjustable 50-70cm",
+    lining: "Cotton lining",
+    careInstructions:
+      "Clean with a soft, damp cloth. Apply leather conditioner occasionally to maintain suppleness. Avoid excessive water and direct sunlight. Store in a cool, dry place when not in use.",
+    inStock: true,
+    dispatchDays: 5,
+    isBestseller: true,
+  },
+];
+
 // Combined products array
 export const allProducts: Product[] = [
   ...jewelleryProducts,
   ...candleProducts,
+  ...bagProducts,
 ];
 
 // Helper functions

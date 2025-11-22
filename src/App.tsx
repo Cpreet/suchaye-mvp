@@ -5,6 +5,8 @@ import { JewelleryListingPage } from "./routes/jewellery/listing";
 import { JewelleryDetailPage } from "./routes/jewellery/detail";
 import { CandlesListingPage } from "./routes/candles/listing";
 import { CandleDetailPage } from "./routes/candles/detail";
+import { BagsListingPage } from "./routes/bags/listing";
+import { BagDetailPage } from "./routes/bags/detail";
 import { CartPage } from "./routes/cart";
 import { CheckoutPage } from "./routes/checkout";
 import { AboutPage } from "./routes/about";
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "candles/:slug",
         element: <CandleDetailPage />,
+      },
+      {
+        path: "bags",
+        element: <BagsListingPage />,
+      },
+      {
+        path: "bags/:slug",
+        element: <BagDetailPage />,
       },
       {
         path: "cart",

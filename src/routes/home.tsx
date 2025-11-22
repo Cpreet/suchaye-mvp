@@ -8,7 +8,7 @@ export function HomePage() {
     <>
       <HeroSection
         title="Suchaye"
-        subtitle="Handcrafted jewellery and candles that feel like little rituals of care."
+        subtitle="Handcrafted jewellery, candles, and bags that feel like little rituals of care."
         primaryAction={{
           label: "Shop Jewellery",
           href: "/jewellery",
