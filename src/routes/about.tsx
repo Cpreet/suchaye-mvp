@@ -2,6 +2,9 @@ import { Section } from "@/components/sections/section";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import brandStoryImage from "@/assets/images/about/brand-story.png";
+import vibhutiPortraitImage from "@/assets/images/about/vibhuti-portrait.png";
+
 export function AboutPage() {
   return (
     <div className="flex flex-col">
@@ -32,10 +35,11 @@ export function AboutPage() {
             </div>
           </div>
           <div className="relative aspect-square lg:aspect-4/5 bg-muted rounded-2xl overflow-hidden">
-             {/* Placeholder for Brand Image */}
-             <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 bg-stone-100">
-                <span className="text-sm uppercase tracking-widest">Brand Image</span>
-             </div>
+             <img 
+               src={brandStoryImage} 
+               alt="A close-up of the Suchaye worktable showing tools and materials" 
+               className="w-full h-full object-cover"
+             />
           </div>
         </div>
       </Section>
@@ -43,36 +47,35 @@ export function AboutPage() {
       <Separator />
 
       {/* Meet Vibhuti */}
-      <Section title="Meet Vibhuti" className="py-16 md:py-24 bg-stone-50/50">
+      <Section title="Meet Vibhuti" className="py-16 md:py-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-           <div className="order-2 lg:order-1 relative aspect-square bg-muted rounded-full overflow-hidden max-w-md mx-auto lg:mx-0 w-full">
-             {/* Placeholder for Portrait */}
-             <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 bg-stone-200">
-                <span className="text-sm uppercase tracking-widest">Vibhuti's Portrait</span>
-             </div>
+           <div className="order-2 lg:order-1 relative aspect-square bg-muted rounded-full overflow-hidden max-w-md mx-auto lg:mx-0 w-full shadow-lg">
+             <img 
+               src={vibhutiPortraitImage} 
+               alt="Portrait of Vibhuti working in the studio" 
+               className="w-full h-full object-cover"
+             />
           </div>
           <div className="order-1 lg:order-2 prose prose-stone prose-lg text-muted-foreground">
             <p>
-              Hi, I'm Vibhuti — the hands behind Suchaye. This whole journey began
-              in my home studio, where I found myself drawn to the quiet rhythm of
-              making things by hand. There's something deeply satisfying about
-              watching a piece of metal take shape under your fingers, or mixing
-              scents until they feel just right.
+              Hi, I'm Vibhuti, and together with my mother, we are the hands behind Suchaye. 
+              This whole journey began in our home studio, where we found ourselves drawn to 
+              the quiet rhythm of making things by hand. There's something deeply satisfying 
+              about this shared process — watching a piece of metal take shape under our fingers, 
+              or mixing scents until we both feel they are just right.
             </p>
             <p>
-              Before Suchaye, I was exploring different creative paths, but nothing
-              quite clicked until I started working with my hands. The first pair
-              of earrings I made felt different — they had a story, a small
-              imperfection that made them mine. That's when I knew this was what I
-              wanted to do.
+              Before Suchaye, we were on different paths, but nothing quite clicked until we 
+              started working side-by-side. The first pair of earrings we made together felt 
+              different — they had a story, a small imperfection that made them ours. That's 
+              when we knew this was what we wanted to do.
             </p>
             <p>
-              Today, every piece that leaves my worktable carries a little bit of
-              that same intention. I design each collection thinking about the
-              person who might wear it or light it — someone looking for something
-              gentle, honest, and made with care. It's not about perfection; it's
-              about creating objects that feel like they belong in your everyday
-              life.
+              Today, every piece that leaves our shared worktable carries that same collective 
+              intention. We design each collection thinking about the person who might wear it 
+              or light it — someone looking for something gentle, honest, and made with care. 
+              It's not about perfection; it's about creating objects that feel like they belong 
+              in your everyday life.
             </p>
           </div>
         </div>
