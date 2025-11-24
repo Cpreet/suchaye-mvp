@@ -44,6 +44,17 @@ export function CartPage() {
     return `₹${price.toLocaleString("en-IN")}`;
   };
 
+  const getCategoryRoute = (category: string) => {
+    switch (category) {
+      case "candle":
+        return "candles";
+      case "bag":
+        return "bags";
+      default:
+        return category;
+    }
+  };
+
   if (cartItems.length === 0) {
     return (
       <Section>
@@ -87,7 +98,7 @@ export function CartPage() {
                       <div className="flex items-start justify-between gap-2 md:gap-4">
                         <div className="flex-1 min-w-0">
                           <Link
-                            to={`/${product.category}/${product.slug}`}
+                            to={`/${getCategoryRoute(product.category)}/${product.slug}`}
                             className="text-sm md:text-base font-medium hover:underline line-clamp-2"
                           >
                             {product.name}

@@ -3,6 +3,7 @@ import { CategoryTilesSection } from "@/components/sections/category-tiles-secti
 import { BestsellersSection } from "@/components/sections/bestsellers-section";
 import { BrandStorySection } from "@/components/sections/brand-story-section";
 import { MarqueeSection } from "@/components/sections/marquee-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
 
 export function HomePage() {
   return (
@@ -22,8 +23,8 @@ export function HomePage() {
       <MarqueeSection />
       <CategoryTilesSection />
       <BestsellersSection />
+      <TestimonialsSection />
       <BrandStorySection />
     </>
   );
 }
-

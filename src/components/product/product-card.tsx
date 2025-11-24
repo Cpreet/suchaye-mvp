@@ -59,8 +59,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const variantCount = product.colors?.length || 0;
   const variantLabel = variantCount > 0 ? `${variantCount} Colors` : null;
 
+  const getCategoryRoute = (category: string) => {
+    switch (category) {
+      case "candle":
+        return "candles";
+      case "bag":
+        return "bags";
+      default:
+        return category;
+    }
+  };
+
   return (
-    <Link to={`/${product.category}/${product.slug}`} className={cn("block h-full", isSoldOut && "opacity-75")}>
+    <Link to={`/${getCategoryRoute(product.category)}/${product.slug}`} className={cn("block h-full", isSoldOut && "opacity-75")}>
       <Card
         className={cn(
           "group h-full overflow-hidden transition-all duration-500 border border-transparent hover:border-primary/20 shadow-sm hover:shadow-xl hover:-translate-y-1 bg-card flex flex-col",

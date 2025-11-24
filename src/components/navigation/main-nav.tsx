@@ -115,10 +115,10 @@ const navItems: NavItem[] = [
         {
           title: "Collections",
           items: [
-            { label: "Gift Sets", href: "/candles?type=gift-set" },
-            { label: "Scent of the Month", href: "/candles?collection=featured" },
-            { label: "Large 3-Wick", href: "/candles?size=large" },
-            { label: "Travel Tins", href: "/candles?size=small" },
+            { label: "Gift Sets", href: "/candles" },
+            { label: "Scent of the Month", href: "/candles" },
+            { label: "Large 3-Wick", href: "/candles" },
+            { label: "Travel Tins", href: "/candles" },
           ]
         }
       ],
@@ -126,12 +126,12 @@ const navItems: NavItem[] = [
         {
           title: "The Calming Collection",
           image: candlesCalmingCollection,
-          href: "/candles?collection=calming"
+          href: "/candles?family=floral"
         },
         {
           title: "Autumn Warmth",
           image: candlesAutumnWarmth,
-          href: "/candles?collection=autumn"
+          href: "/candles?family=woody"
         }
       ]
     }
@@ -166,12 +166,12 @@ const navItems: NavItem[] = [
         {
           title: "Weekend Getaway",
           image: bagsWeekendGetaway,
-          href: "/bags?collection=weekend"
+          href: "/bags?type=tote"
         },
         {
           title: "Office Essentials",
           image: bagsOfficeEssentials,
-          href: "/bags?collection=work"
+          href: "/bags?type=backpack"
         }
       ]
     }

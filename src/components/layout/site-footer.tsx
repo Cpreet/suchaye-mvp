@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Heart } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -9,7 +10,7 @@ export function SiteFooter() {
           <div className="col-span-2 md:col-span-1 space-y-3 md:space-y-4">
             <h3 className="text-lg md:text-xl lg:text-2xl font-serif font-medium">Suchaye</h3>
             <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed font-light">
-              Handcrafted jewellery and candles that feel like little rituals of
+              Handcrafted jewellery, candles, and bags that feel like little rituals of
               care.
             </p>
           </div>
@@ -32,6 +33,14 @@ export function SiteFooter() {
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   Candles
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/bags"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  Bags
                 </Link>
               </li>
             </ul>
@@ -84,8 +93,15 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-border/40 text-center text-xs md:text-sm text-muted-foreground">
+        <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Suchaye. All rights reserved.</p>
+          <div className="flex items-center gap-1.5">
+            <span>v0.1.0</span>
+            <span className="mx-1 opacity-25">|</span>
+            <span className="flex items-center gap-1">
+              Made with <Heart className="h-3 w-3 text-red-500 fill-red-500 animate-pulse" />
+            </span>
+          </div>
         </div>
       </div>
     </footer>
