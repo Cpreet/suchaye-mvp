@@ -5,13 +5,15 @@ import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
 import type { JewelleryType, JewelleryProduct } from "@/data/products";
 import { Button } from "@/components/ui/button";
+import { useRegion } from "@/lib/region-context";
 
 function isJewelleryProduct(p: { category: string }): p is JewelleryProduct {
   return p.category === "jewellery";
 }
 
 export function JewelleryListingPage() {
-  const allProducts = getProductsByCategory("jewellery");
+  const { region } = useRegion();
+  const allProducts = getProductsByCategory("jewellery", region);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedType = (searchParams.get("type") as JewelleryType | null) || "all";
 

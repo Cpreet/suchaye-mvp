@@ -1,4 +1,5 @@
 // Dummy product data for Suchaye MVP
+import type { Region } from '@/lib/types';
 import jew001 from '@/assets/images/products/jew-001.png';
 import jew002 from '@/assets/images/products/jew-002.png';
 import jew003 from '@/assets/images/products/jew-003.png';
@@ -85,6 +86,7 @@ export interface BaseProduct {
   isBestseller?: boolean;
   isNew?: boolean;
   colors?: string[]; // Added for variant indicator
+  regions?: Region[];
 }
 
 export interface JewelleryProduct extends BaseProduct {
@@ -168,6 +170,7 @@ export const jewelleryProducts: JewelleryProduct[] = [
     inStock: true,
     dispatchDays: 3,
     isNew: true,
+    regions: ["america"],
   },
   {
     id: "jew-003",
@@ -388,6 +391,7 @@ export const candleProducts: CandleProduct[] = [
     inStock: true,
     dispatchDays: 3,
     isBestseller: true,
+    regions: ["europe"],
   },
   {
     id: "can-002",
@@ -643,6 +647,7 @@ export const bagProducts: BagProduct[] = [
     dispatchDays: 5,
     isBestseller: true,
     colors: ["Natural", "Grey", "Black"],
+    regions: ["gulf"],
   },
   {
     id: "bag-002",
@@ -722,15 +727,28 @@ export function getProductBySlug(slug: string): Product | undefined {
 }
 
 export function getProductsByCategory(
-  category: ProductCategory
+  category: ProductCategory,
+  region?: Region
 ): Product[] {
-  return allProducts.filter((p) => p.category === category);
+  const products = allProducts.filter((p) => p.category === category);
+  if (region) {
+    return products.filter((p) => !p.regions || p.regions.includes(region));
+  }
+  return products;
 }
 
-export function getBestsellers(): Product[] {
-  return allProducts.filter((p) => p.isBestseller);
+export function getBestsellers(region?: Region): Product[] {
+  const products = allProducts.filter((p) => p.isBestseller);
+  if (region) {
+    return products.filter((p) => !p.regions || p.regions.includes(region));
+  }
+  return products;
 }
 
-export function getNewProducts(): Product[] {
-  return allProducts.filter((p) => p.isNew);
+export function getNewProducts(region?: Region): Product[] {
+  const products = allProducts.filter((p) => p.isNew);
+  if (region) {
+    return products.filter((p) => !p.regions || p.regions.includes(region));
+  }
+  return products;
 }

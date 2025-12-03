@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router";
+import { useRegion } from "@/lib/region-context";
+import { CURRENCY_RATES } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,12 +18,23 @@ interface ProductCardProps {
 export function ProductCard({ product, className }: ProductCardProps) {
   const navigate = useNavigate();
   const cart = useCart();
+  const { currency } = useRegion();
   
   const cartItem = cart.items.find((item) => item.productId === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
   const isSoldOut = !product.inStock;
 
   const formatPrice = (price: number) => {
+    if (currency === 'AED') {
+      return `AED ${(price * CURRENCY_RATES.AED).toFixed(0)}`;
+    }
+    if (currency === 'USD') {
+      return `$${(price * CURRENCY_RATES.USD).toFixed(2)}`;
+    }
+    if (currency === 'EUR') {
+      return `€${(price * CURRENCY_RATES.EUR).toFixed(2)}`;
+    }
+    // Default to INR
     return `₹${price.toLocaleString("en-IN")}`;
   };
 

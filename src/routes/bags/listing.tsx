@@ -5,13 +5,15 @@ import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
 import type { BagType, BagMaterial, BagProduct } from "@/data/products";
 import { Button } from "@/components/ui/button";
+import { useRegion } from "@/lib/region-context";
 
 function isBagProduct(p: { category: string }): p is BagProduct {
   return p.category === "bag";
 }
 
 export function BagsListingPage() {
-  const allProducts = getProductsByCategory("bag");
+  const { region } = useRegion();
+  const allProducts = getProductsByCategory("bag", region);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedType = (searchParams.get("type") as BagType | null) || "all";
   const [selectedMaterial, setSelectedMaterial] = useState<BagMaterial | "all">("all");

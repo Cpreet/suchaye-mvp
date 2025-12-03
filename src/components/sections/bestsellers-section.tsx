@@ -1,8 +1,10 @@
 import { ProductGrid } from "../product/product-grid";
 import { getBestsellers } from "@/data/products";
+import { useRegion } from "@/lib/region-context";
 
 export function BestsellersSection() {
-  const bestsellers = getBestsellers();
+  const { region } = useRegion();
+  const bestsellers = getBestsellers(region);
 
   return (
     <section className="container mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16">

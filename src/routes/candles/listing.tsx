@@ -5,13 +5,15 @@ import { ProductGrid } from "@/components/product/product-grid";
 import { getProductsByCategory } from "@/data/products";
 import type { ScentFamily, CandleProduct } from "@/data/products";
 import { Button } from "@/components/ui/button";
+import { useRegion } from "@/lib/region-context";
 
 function isCandleProduct(p: { category: string }): p is CandleProduct {
   return p.category === "candle";
 }
 
 export function CandlesListingPage() {
-  const allProducts = getProductsByCategory("candle");
+  const { region } = useRegion();
+  const allProducts = getProductsByCategory("candle", region);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedScent = (searchParams.get("family") as ScentFamily | null) || "all";
 

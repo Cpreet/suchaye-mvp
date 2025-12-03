@@ -1,13 +1,27 @@
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import type { Product } from "@/data/products";
+import { useRegion } from "@/lib/region-context";
+import { CURRENCY_RATES } from "@/lib/types";
 
 interface ProductInfoBlockProps {
   product: Product;
 }
 
 export function ProductInfoBlock({ product }: ProductInfoBlockProps) {
+  const { currency } = useRegion();
+
   const formatPrice = (price: number) => {
+    if (currency === 'AED') {
+      return `AED ${(price * CURRENCY_RATES.AED).toFixed(0)}`;
+    }
+    if (currency === 'USD') {
+      return `$${(price * CURRENCY_RATES.USD).toFixed(2)}`;
+    }
+    if (currency === 'EUR') {
+      return `€${(price * CURRENCY_RATES.EUR).toFixed(2)}`;
+    }
+    // Default to INR
     return `₹${price.toLocaleString("en-IN")}`;
   };
 
